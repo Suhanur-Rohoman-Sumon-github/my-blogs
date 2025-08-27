@@ -1,26 +1,37 @@
+"use client";
+
 import React from "react";
+import { useParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
-import { mockBlogs } from "@/data/data";
+import { ArrowLeft, Share2 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Sidebar } from "@/components/sidebar/Sidebar";
+import { useGetSinglePostQuery } from "@/hooks/Blog.hook";
 
 const BlogPost: React.FC = () => {
-  const id = "1"; // Replace with dynamic ID from route params
-  const blogs = mockBlogs;
+  const params = useParams();
+  const postId = params?.blogId as string; // Get the blog ID from route
 
-  const post = blogs.find((blog) => blog.id === id);
+  const { data: post, isLoading, isError } = useGetSinglePostQuery(postId);
 
-  if (!post) {
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Loading blog...</p>
+      </div>
+    );
+  }
+
+  if (isError || !post) {
     return (
       <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-16 text-center">
           <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
           <p className="text-muted-foreground mb-8">
-            The blog post you are looking for doesnot exist.
+            The blog post you are looking for does not exist.
           </p>
           <Link href="/">
             <Button>
@@ -107,7 +118,7 @@ const BlogPost: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 pt-8">
-                  {post.tags.map((tag) => (
+                  {post.tags.map((tag: string) => (
                     <Badge
                       key={tag}
                       variant="outline"

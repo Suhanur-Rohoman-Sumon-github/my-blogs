@@ -24,7 +24,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({
   };
 
   return (
-    <Link href={`/blog/${post.id}`}>
+    <Link href={`/blog/${post._id}`}>
       <Card
         className={`group cursor-pointer overflow-hidden transition-smooth hover:scale-105 shadow-card hover:shadow-primary ${
           featured ? "md:col-span-2 md:row-span-2" : ""

@@ -1,12 +1,26 @@
+"use client";
 import React from "react";
 import { Sidebar } from "@/components/sidebar/Sidebar";
 import { BlogGrid } from "@/components/blogs/BlogGrid";
 import { AdBanner } from "@/components/banner/Banner";
-import { useBlog } from "@/context/BlogContext";
+
 import { mockBlogs } from "@/data/data";
+import { useGetAllPostsQuery } from "@/hooks/Blog.hook";
 
 const BlogHome: React.FC = () => {
-  const blogs = mockBlogs;
+  // const blogs = mockBlogs;
+
+  const { data: blogs, isLoading } = useGetAllPostsQuery();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg">Loading posts...</p>
+      </div>
+    );
+  }
+
+  console.log(blogs);
 
   return (
     <div className="min-h-screen bg-background">

@@ -13,6 +13,7 @@ export interface BlogPost {
   readTime: number;
   featured: boolean;
   imageUrl: string;
+  _id: string;
 }
 
 export interface BlogCategory {
