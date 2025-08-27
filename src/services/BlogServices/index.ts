@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const getAllPosts = async () => {
   try {
-    const { data } = await axios.get(`http://localhost:5000/api/v1/posts`);
+    const { data } = await axios.get(`https://blog-server-five-plum.vercel.app/api/v1/posts`);
     console.log(data);
     return data.data; // matches backend sendResponse
   } catch (error: any) {
@@ -18,7 +18,7 @@ export const getAllPosts = async () => {
 
 export const getSinglePost = async (postId: string) => {
   try {
-    const { data } = await axios.get(`http://localhost:5000/api/v1/posts/${postId}`);
+    const { data } = await axios.get(`https://blog-server-five-plum.vercel.app/api/v1/posts/${postId}`);
     return data.data;
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
@@ -35,7 +35,7 @@ export const createPost = async (postData: {
 }) => {
   console.log(postData);
   try {
-    const { data } = await axios.post(`http://localhost:5000/api/v1/posts`, postData, {
+    const { data } = await axios.post(`https://blog-server-five-plum.vercel.app/api/v1/posts`, postData, {
       headers: {
         "Content-Type": "application/json",
       },
