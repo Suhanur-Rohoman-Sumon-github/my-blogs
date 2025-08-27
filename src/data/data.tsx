@@ -39,7 +39,6 @@ export const categories: BlogCategory[] = [
   },
 ];
 
-
 export const mockBlogs: BlogPost[] = [
   {
     id: "1",
